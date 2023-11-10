@@ -31,7 +31,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/dcover"
           cd "$RUNNER_TEMP/dcover"
           curl --silent --show-error --location --output "diffblue-cover-cli.zip" "$DIFFBLUE_COVER_URL1"
-          unzip -q "diffblue-cover-cli-zip"
+          unzip -q "diffblue-cover-cli.zip"
           rm -f "diffblue-cover-cli.zip"
           echo "$RUNNER_TEMP/dcover" >> "$GITHUB_PATH"
       - name: Compile project
