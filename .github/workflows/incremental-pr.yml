@@ -15,6 +15,10 @@ jobs:
     env:
       JVM_ARGS: -Xmx8192m
     steps:
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -35,10 +39,6 @@ jobs:
           rm -f "diffblue-cover-cli.zip"
           echo "$RUNNER_TEMP/dcover" >> "$GITHUB_PATH"
       - name: Compile project
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
         run: mvn --batch-mode --no-transfer-progress clean compile
       - name: Create unit tests based on diff
         run: dcover create --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
