@@ -6,7 +6,7 @@ on:
     paths:
       - '**.java'
 concurrency:
-  # Only allow one run of the workflow per branch to run at a time
+  # Only allow one run of the workflow per branch to run at a timea
   group: $
   cancel-in-progress: true
 jobs:
