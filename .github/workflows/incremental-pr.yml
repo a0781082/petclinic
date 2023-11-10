@@ -15,8 +15,12 @@ jobs:
     env:
       JVM_ARGS: -Xmx8192m
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       - name: Checkout repository
-        uses: actions/checkout@v3.5.3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
