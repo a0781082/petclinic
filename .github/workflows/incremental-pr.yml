@@ -6,7 +6,7 @@ on:
     paths:
       - '**.java'
 concurrency:
-  # Only allow one run of the workflow per branch to run at a time
+  # Only allow one run of the workflow per branch to run at a timea
   group: $
   cancel-in-progress: true
 jobs:
@@ -15,8 +15,12 @@ jobs:
     env:
       JVM_ARGS: -Xmx8192m
     steps:
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       - name: Checkout repository
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
@@ -36,10 +40,14 @@ jobs:
           echo "$RUNNER_TEMP/dcover" >> "$GITHUB_PATH"
       - name: Compile project
         run: mvn --batch-mode --no-transfer-progress clean compile
-      - name: Create unit tests based on diff
-        run: dcover create --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
-      - name: Add the new tests
-        run: |
-          git add -f "*/*DiffblueTest.java"
-          git commit -am "Incremental Diffblue Test"
-          git push origin HEAD:${{ github.head_ref }}
+      - name: Activate Diffblue Cover
+        run: dcover activate "${{ secrets.DIFFBLUE_COVER_LICENSE_KEY }}"
+      - name: Create all unit tests
+        run: dcover create  --maven --batch
+      #- name: Create unit tests based on diff
+      #  run: dcover create --maven --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
+      #- name: Add the new tests
+      #  run: |
+      #    git add -f "*/*DiffblueTest.java"
+      #    git commit -am "Incremental Diffblue Test"
+      #    git push origin HEAD:${{ github.head_ref }}
