@@ -43,9 +43,9 @@ jobs:
       - name: Activate Diffblue Cover
         run: dcover activate "${{ secrets.DIFFBLUE_COVER_LICENSE_KEY }}"
       - name: Create all unit tests
-        run: dcover create
+        run: dcover create  --maven --batch
       #- name: Create unit tests based on diff
-      #  run: dcover create --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
+      #  run: dcover create --maven --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
       #- name: Add the new tests
       #  run: |
       #    git add -f "*/*DiffblueTest.java"
