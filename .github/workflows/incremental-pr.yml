@@ -46,8 +46,8 @@ jobs:
         run: dcover create  --maven --batch
       #- name: Create unit tests based on diff
       #  run: dcover create --maven --batch --patch-only "$GITHUB_WORKSPACE/changes.patch"
-      #- name: Add the new tests
-      #  run: |
-      #    git add -f "*/*DiffblueTest.java"
-      #    git commit -am "Incremental Diffblue Test"
-      #    git push origin HEAD:${{ github.head_ref }}
+      - name: Add the new tests
+        run: |
+          git add -f "*/*DiffblueTest.java"
+          git commit -am "Incremental Diffblue Test"
+          git push origin HEAD:${{ github.head_ref }}
