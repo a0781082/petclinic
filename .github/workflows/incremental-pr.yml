@@ -1,7 +1,5 @@
 name: Diffblue write incremental tests for a Java PR
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     types:
       - opened
