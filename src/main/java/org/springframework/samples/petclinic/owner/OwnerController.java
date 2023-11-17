@@ -102,8 +102,8 @@ class OwnerController {
 
 		if (ownersResults.getTotalElements() == 1) {
 			// 1 owner founded
-			 owner = ownersResults.iterator().next();
-			//return addPaginationModel(page, model, ownersResults);
+			owner = ownersResults.iterator().next();
+			// return addPaginationModel(page, model, ownersResults);
 			return "redirect:/owners/" + owner.getId();
 		}
 
