@@ -95,16 +95,16 @@ class OwnerController {
 		// find owners by last Name
 		Page<Owner> ownersResults = findPaginatedForOwnersLastName(page, owner.getLastName());
 		if (ownersResults.isEmpty()) {
-			// no owners founD
+			// no owners found
 			result.rejectValue("lastName", "notFound", "not found");
 			return "owners/findOwners";
 		}
 
 		if (ownersResults.getTotalElements() == 1) {
-			// 1 owner founded
-			 owner = ownersResults.iterator().next();
-			//return addPaginationModel(page, model, ownersResults);
-			return "redirect:/owners/" + owner.getId();
+			// 1 owner found
+			owner = ownersResults.iterator().next();
+			return addPaginationModel(page, model, ownersResults);
+			// return "redirect:/owners/" + owner.getId();
 		}
 
 		// multiple owners found
