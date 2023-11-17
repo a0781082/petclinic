@@ -6,7 +6,7 @@ on:
     paths:
       - '**.java'
 concurrency:
-  # Only allow one run of the workflow per branch to run at a timea
+  # Only allow one run of the workflow per branch to run at a time
   group: $
   cancel-in-progress: true
 jobs:
@@ -38,6 +38,8 @@ jobs:
           unzip -q "diffblue-cover-cli.zip"
           rm -f "diffblue-cover-cli.zip"
           echo "$RUNNER_TEMP/dcover" >> "$GITHUB_PATH"
+      - name: Ensure spring-javaformat is correct
+        run: mvn spring-javaformat:apply
       - name: Compile project
         run: mvn --batch-mode --no-transfer-progress clean compile
       - name: Activate Diffblue Cover
