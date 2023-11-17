@@ -100,9 +100,10 @@ class OwnerController {
 			return "owners/findOwners";
 		}
 
-		if (ownersResults.getTotalElements() == 2) {
+		if (ownersResults.getTotalElements() == 1) {
 			// 1 owner founded
-			owner = ownersResults.iterator().next();
+			 owner = ownersResults.iterator().next();
+			//return addPaginationModel(page, model, ownersResults);
 			return "redirect:/owners/" + owner.getId();
 		}
 
