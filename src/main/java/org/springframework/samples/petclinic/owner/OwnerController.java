@@ -101,10 +101,10 @@ class OwnerController {
 		}
 
 		if (ownersResults.getTotalElements() == 1) {
-			// 1 owner found
+			// 1 owner found1
 			owner = ownersResults.iterator().next();
-			return addPaginationModel(page, model, ownersResults);
-			// return "redirect:/owners/" + owner.getId();
+			// return addPaginationModel(page, model, ownersResults);
+			return "redirect:/owners/" + owner.getId();
 		}
 
 		// multiple owners found
